@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Welcome to Products Page!</title>
+		<style type="text/css">
+		  body {font-family:sans-serif;color:#4f494f;}
+		  h5 {display: inline;}
+		  .label {text-align: right}
+		  .products {float:left; padding-top: 10px;}
+		  .item {width:100%;float:left; padding:3px;}
+		  .wrapper { padding-left: 25px; padding-top: 20px}
+		  form  { display: table; border-radius: 7.5px;     }
+		  p     { display: table-row;  }
+		  label { display: table-cell; }
+		 input { display: table-cell; }
+		</style>
+	</head>
+	
+	<body>
+		<div class="wrapper">
+			<h1>Welcome to Products Page!</h1>
+			<div class="products_input" >
+			<form method="post" class="form" action="/newitem" method='post'>
+			 <p>
+			  	<label for="a">Item:</label> 
+			  	<input id="a" type="text" name="item"/>
+			  </p>
+			  <p>
+			  <label for="b">Code:</label>
+			  <input id="b" type="text" name="code"/>
+			  <p>
+			  <label for="c">Price:</label>
+			  <input id="c" type="text" name="price"/>
+			  </p>
+			  <input type="submit" value='Add Product'/>
+			</form>
+			</div>
+			<div class="products">
+				<h3>Products:</h3>
+				%for item in products:
+				<div class="item">
+				<h5>Item:</h5> {{item['item']}}
+				<br>
+				 <h5>Code:</h5> {{item['code']}}
+				 </div>
+				 %end
+			</div>
+		</div>
+	</body>
+</html>
