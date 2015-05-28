@@ -2,9 +2,12 @@ import bottle
 import pymongo
 import guestbookDAO
 import productDAO
+import categoryDAO
+import memberDAO
 
 from bottle import route, error, post, get, run, static_file, abort, redirect, response, request, template
 
+path1 = "/Users/lavanya/documents/"
 #This is the default route, our index page. Here we need to read the documents from MongoDB.
 
 @route('/')
@@ -32,17 +35,17 @@ def hello_name(name):
 
 @route('/css/:filename')
 def serve_static(filename):
-    return static_file(filename, root='/Users/lavanya/documents/Cloud Computing/Assignment Cloud/webapp/css/')
+    return static_file(filename, root = path1 + 'Cloud Computing/Assignment Cloud/cloudcomputing/css/')
 
 
 
 @route('/images/:filename')
 def serve_static(filename):
-    return static_file(filename, root='/Users/lavanya/documents/Cloud Computing/Assignment Cloud/webapp/images/')
+    return static_file(filename, root = path1 + 'Cloud Computing/Assignment Cloud/cloudcomputing/images/')
 
 @route('/js/:filename')
 def serve_static(filename):
-    return static_file(filename, root='/Users/lavanya/documents/Cloud Computing/Assignment Cloud/webapp/js/')
+    return static_file(filename, root = path1 + 'Cloud Computing/Assignment Cloud/cloudcomputing/js/')
 
 
 @get('/upload')
@@ -75,8 +78,42 @@ def insert_newitem():
 		item = bottle.request.forms.get("item")
 		code = bottle.request.forms.get("code")
 		price = bottle.request.forms.get("price")
-		product.insert_products(item,code,price)
+		aquantity = bottle.request.forms.get("aquantity")
+		threshold = bottle.request.forms.get("threshold")
+		rquantity = bottle.request.forms.get("rquantity")
+		product.insert_products(item,code,price,aquantity,threshold,rquantity)
 		bottle.redirect('/products')
+
+
+@route('/category')
+def category_index():
+		category_list = category.find_category()
+		return bottle.template('category',dict(category = category_list))
+		
+@route('/newcategoryitem',method='POST')
+def insert_newcategoryitem():
+		categorycode = bottle.request.forms.get("categorycode")
+		description = bottle.request.forms.get("description")
+
+		category.insert_category(categorycode,description)
+		bottle.redirect('/category')
+		
+		
+		
+		
+		
+@route('/member')
+def member_index():
+		member_list = member.find_member()
+		return bottle.template('member',dict(member = member_list))
+		
+@route('/newmember',method='POST')
+def insert_newmember():
+		fname = bottle.request.forms.get("firstname")
+		lname = bottle.request.forms.get("lastname")
+		memid = bottle.request.forms.get("memberid")
+		member.insert_member(fname,lname,memid)
+		bottle.redirect('/member')
 
 #This is to setup the connection
 
@@ -91,6 +128,9 @@ database = connection.names
 #Finally, let out data access object class we built which acts as out data layer know about this
 guestbook = guestbookDAO.GuestbookDAO(database)
 product = productDAO.ProductDAO(database)
+category = categoryDAO.CategoryDAO(database)
+
+member = memberDAO.MemberDAO(database)
 
 bottle.debug(True)
 bottle.run(host='localhost',port=8082)

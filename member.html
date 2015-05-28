@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Welcome to Products Page!</title>
+		<style type="text/css">
+		  body {font-family:sans-serif;color:#4f494f;}
+		  h5 {display: inline;}
+		  .label {text-align: right}
+		  .member {float:left; padding-top: 10px;}
+		  .item {width:100%;float:left; padding:3px;}
+		  .wrapper { padding-left: 25px; padding-top: 20px}
+		  form  { display: table; border-radius: 7.5px;     }
+		  p     { display: table-row;  }
+		  label { display: table-cell; }
+		 input { display: table-cell; }
+		</style>
+	</head>
+	
+	<body>
+		<div class="wrapper">
+			<h1>Welcome to Member Page!</h1>
+			<div class="member_input" >
+			<form method="post" class="form" action="/newmember" method='post'>
+			 <p>
+			  	<label for="a">First Name</label> 
+			  	<input id="a" type="text" name="firstname"/>
+			  </p>
+			  <p>
+			  <label for="b">Last Name</label>
+			  <input id="b" type="text" name="lastname"/>
+			  <p>
+			  <label for="c">Member Id</label>
+			  <input id="c" type="text" name="memberid"/>
+			  </p>
+			  <input type="submit" value='Add Member'/>
+			</form>
+			</div>
+			<div class="member">
+				<h3>member:</h3>
+				%for item in member:
+				<div class="item">
+				<h5>First Name:</h5> {{item['firstname']}}
+				<br>
+				 <h5>Last Name:</h5> {{item['lastname']}}
+				 <br>
+				 <h5>Member Id:</h5> {{item['memberid']}}
+				 </div>
+				 %end
+			</div>
+		</div>
+	</body>
+</html>

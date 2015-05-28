@@ -32,6 +32,18 @@
 			  <label for="c">Price:</label>
 			  <input id="c" type="text" name="price"/>
 			  </p>
+			  <p>
+			  <label for="d">Available Quantity:</label>
+			  <input id="d" type="text" name="aquantity"/>
+			  </p>
+			  <p>
+			  <label for="e">Threshold:</label>
+			  <input id="e" type="text" name="threshold"/>
+			  </p>
+			  <p>
+			  <label for="f">Reorder Quantity:</label>
+			  <input id="f" type="text" name="rquantity"/>
+			  </p>
 			  <input type="submit" value='Add Product'/>
 			</form>
 			</div>
@@ -42,6 +54,14 @@
 				<h5>Item:</h5> {{item['item']}}
 				<br>
 				 <h5>Code:</h5> {{item['code']}}
+				 <br>
+				 <h5>Price:</h5> {{item['price']}}
+				 <br>
+				 <h5>Available Quantity:</h5> {{item['aquantity']}}
+				 <br>
+				 <h5>Threshold:</h5> {{item['threshold']}}
+				 <br>
+				 <h5>Reorder Quantity:</h5> {{item['rquantity']}}
 				 </div>
 				 %end
 			</div>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Welcome to Category Page!</title>
+		<style type="text/css">
+		  body {font-family:sans-serif;color:#4f494f;}
+		  h5 {display: inline;}
+		  .label {text-align: right}
+		  .category {float:left; padding-top: 10px;}
+		  .categoryitem {width:100%;float:left; padding:3px;}
+		  .wrapper { padding-left: 25px; padding-top: 20px}
+		  form  { display: table; border-radius: 7.5px;     }
+		  p     { display: table-row;  }
+		  label { display: table-cell; }
+		 input { display: table-cell; }
+		</style>
+	</head>
+	
+	<body>
+		<div class="wrapper">
+			<h1>Welcome to Category Page!</h1>
+			<div class="category_input" >
+			<form method="post" class="form" action="/newcategoryitem" method='post'>
+			 <p>
+			  	<label for="a">Category Code:</label> 
+			  	<input id="a" type="text" name="categorycode"/>
+			  </p>
+			  <p>
+			  <label for="b">Description:</label>
+			  <input id="b" type="text" name="description"/>
+			  </p>
+
+			  <input type="submit" value='Add Category'/>
+			</form>
+			</div>
+			<div class="category">
+				<h3>Category:</h3>
+				%for item in category:
+				<div class="categoryitem">
+				<h5>Category Code:</h5> {{item['categorycode']}}
+				<br>
+				 <h5>Description:</h5> {{item['description']}}
+				 
+				 </div>
+				 %end
+			</div>
+		</div>
+	</body>
+</html>
